@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import adminServiceInstance from '../../Services/Dispatch/Auth';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../../assets/images/abyride-logo.png'
+import Logo from '../../assets/images/kalinga_logo.png'
 import Swal from 'sweetalert2';
 
 

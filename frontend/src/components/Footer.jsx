@@ -26,7 +26,7 @@ const Footer = () => {
       <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
         {/* Logo Section */}
         <div className="w-full lg:w-2/5">
-          <img src={Logo} alt="Logo" className=" object-contain w-20  mb-4" />
+          <img src={Logo} alt="Logo" className=" object-contain w-20 -mt-10" />
           <p className="text-white font-semibold">
             Thank you for visiting our website! Stay connected <br /> and reach
             out to us on social media.
@@ -38,7 +38,7 @@ const Footer = () => {
             className="flex w-[40%] items-center mt-8  bg-[#47B2E4] text-sm text-white py-3 px-6 rounded-full"
           >
             <FaWhatsapp className="text-white mr-2" />
-            <span className="font-semibold">+250 798 888 888</span>
+            <span className="font-semibold">+250786136396</span>
           </a>
 
         </div>
@@ -63,6 +63,14 @@ const Footer = () => {
                   className="text-gray-300 hover:text-[#47B2E4] transition"
                 >
                   game accessories selling
+                </Link>
+              </li>
+                   <li>
+                <Link
+                  to="/terms-and-conditions"
+                  className="text-gray-300 hover:text-[#47B2E4] transition"
+                >
+                  terms and conditions
                 </Link>
               </li>
             </ul>
@@ -97,14 +105,7 @@ const Footer = () => {
                   FAQ
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/terms-and-conditions"
-                  className="text-gray-300 hover:text-[#47B2E4] transition"
-                >
-                  terms and conditions
-                </Link>
-              </li>
+         
             </ul>
           </div>
 

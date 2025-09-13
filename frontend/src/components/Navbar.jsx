@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <div className="z-50">
       <SimpleHeader />
-      <div className="w-full  sticky top-0  bg-gradient-to-br from-slate-300 via-blue-50 to-cyan-200 px-2 py-2 -mt-4 rounded-xl flex justify-between items-center shadow-md mb-2">
+      <div className="w-full  sticky top-0  bg-gradient-to-br from-slate-300 via-blue-50 to-cyan-200 px-2 p-0 -mt-4 rounded-xl flex justify-between items-center shadow-md mb-2">
         {/* Logo */}
         <img src={Logo} alt="Logo" className="h-20 ml-12 object-contain  " />
 

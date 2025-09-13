@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Play, ArrowRight } from "lucide-react";
 
-import Image1 from '../../assets/static/slide1.webp';
-import Image2 from '../../assets/static/slide2.webp';
-import Image3 from '../../assets/static/slide3.webp';
+import Image1 from '../../assets/static/slide1.jpg';
+import Image2 from '../../assets/static/slide2.jpg';
+import Image3 from '../../assets/static/slide3.jpg';
 
 
 const HeroPage = () => {
@@ -17,15 +17,15 @@ const images = [
 ];
 
 const words = [
-  "Top-Quality Machines for Every Need",
+  "Top-Quality Machines for Every Thing Need",
   "Immersive PlayStation Gaming Experiences",
   "Expert Repair Services for All Electronics",
 ];
 
 const serviceTypes = [
   "Device Sales",
-  "Repair Services",
-  "Tech Support",
+  "Top Up Services",
+  "Shipping Service",
 ];
 
 
