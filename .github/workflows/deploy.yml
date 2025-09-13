@@ -15,11 +15,11 @@ jobs:
       # === BACKEND DEPLOYMENT ===
       - name: 📦 Install backend dependencies
         run: npm install
-        working-directory: ./backend
+        working-directory: ./Backend
 
       - name: 🛠 Build backend
         run: npm run build
-        working-directory: ./backend
+        working-directory: ./Backend
 
       - name: 📂 Upload backend to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
