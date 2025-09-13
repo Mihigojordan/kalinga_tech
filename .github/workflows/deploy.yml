@@ -9,33 +9,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout the repository
       - name: ⏬ Checkout code
         uses: actions/checkout@v4
 
-      # === BUILD BACKEND LOCALLY IN CI ===
+      # 2️⃣ Install backend dependencies
       - name: 📦 Install backend dependencies
         run: npm install
         working-directory: ./Backend
 
+      # 3️⃣ Build backend
       - name: 🛠 Build backend
         run: npm run build
         working-directory: ./Backend
 
-      # === UPLOAD ONLY DIST AND PACKAGE FILES TO VPS ===
-      - name: 📂 Upload compiled backend to VPS via SCP
+      # 4️⃣ Verify build output exists
+      - name: 📂 Verify build output
+        run: ls -la Backend/dist
+
+      # 5️⃣ Upload compiled backend to VPS via SCP
+      - name: 🚀 Upload backend to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 162.0.224.102
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: |
-            Backend/dist/**
-            Backend/package*.json
+            Backend/dist
+            Backend/package.json
+            Backend/package-lock.json
           target: /var/www/kalingatech
           strip_components: 1
 
-      # === INSTALL PRODUCTION DEPENDENCIES & START PM2 ON VPS ===
-      - name: ⚡ Install production deps and restart PM2
+      # 6️⃣ Install production dependencies and restart PM2 on VPS
+      - name: ⚡ Install prod deps and restart PM2
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: 162.0.224.102
@@ -44,6 +51,7 @@ jobs:
           script: |
             cd /var/www/kalingatech
             npm ci --only=production
-            # If app already exists in PM2, restart it; otherwise start it
+            # If PM2 process exists, restart; otherwise, start
             pm2 describe kalingatech || pm2 start dist/main.js --name kalingatech
+            pm2 restart kalingatech
             pm2 save
