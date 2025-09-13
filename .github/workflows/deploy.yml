@@ -12,7 +12,7 @@ jobs:
       - name: ⏬ Checkout code
         uses: actions/checkout@v4
 
-      # === BACKEND DEPLOYMENT ===
+      # === BUILD BACKEND LOCALLY IN CI ===
       - name: 📦 Install backend dependencies
         run: npm install
         working-directory: ./Backend
@@ -21,12 +21,29 @@ jobs:
         run: npm run build
         working-directory: ./Backend
 
-      - name: 📂 Upload backend to VPS via SCP
+      # === UPLOAD ONLY DIST AND PACKAGE FILES TO VPS ===
+      - name: 📂 Upload compiled backend to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 162.0.224.102
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "Backend/**"
-          target: "/var/www/kalingatech"
+          source: |
+            Backend/dist/**
+            Backend/package*.json
+          target: /var/www/kalingatech
           strip_components: 1
+
+      # === INSTALL PRODUCTION DEPENDENCIES & START PM2 ON VPS ===
+      - name: ⚡ Install production deps and restart PM2
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: 162.0.224.102
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/kalingatech
+            npm ci --only=production
+            # If app already exists in PM2, restart it; otherwise start it
+            pm2 describe kalingatech || pm2 start dist/main.js --name kalingatech
+            pm2 save
