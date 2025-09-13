@@ -9,30 +9,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
+      # Step 1: Checkout the repo
       - name: ⏬ Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ Install backend dependencies
+      # Step 2: Install dependencies for backend
       - name: 📦 Install backend dependencies
         run: npm install
         working-directory: ./Backend
 
-      # 3️⃣ Build backend
+      # Step 3: Build the backend
       - name: 🛠 Build backend
-        run: npm run build
+        run: |
+          npm run build
+          ls -la ./Backend/dist
         working-directory: ./Backend
 
-      # 4️⃣ Upload compiled dist folder and package files
-      - name: 🚀 Upload compiled backend to VPS
+      # Step 4: Upload compiled backend (dist folder) to VPS
+      - name: 📂 Upload compiled backend
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 162.0.224.102
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: |
-            Backend/dist/**
-            Backend/package.json
-            Backend/package-lock.json
+          source: ./Backend/dist
+          target: /var/www/kalingatech/dist
+
+      # Step 5: Upload package.json and package-lock.json
+      - name: 📦 Upload package files
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 162.0.224.102
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: ./Backend/package*.json
           target: /var/www/kalingatech
-          strip_components: 1
+
+      # Step 6: Restart backend with PM2
+      - name: 🔄 Restart backend with PM2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: 162.0.224.102
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/kalingatech
+            npm install --production
+            pm2 restart backend || pm2 start dist/main.js --name backend
