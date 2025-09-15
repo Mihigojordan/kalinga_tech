@@ -3,10 +3,9 @@ import { Module } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { ContactController } from './contact.controller';
 import { PrismaService } from '../../Prisma/prisma.service';
-import { EmailService } from '../../Global/Messages/email/email.service';
 
 @Module({
   controllers: [ContactController],
-  providers: [ContactService, PrismaService, EmailService],
+  providers: [ContactService, PrismaService],
 })
 export class ContactModule {}

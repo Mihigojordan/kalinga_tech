@@ -94,14 +94,5 @@ export class AdminController {
         }
     }
 
-    @Get('reservations')
-    @UseGuards(AdminAuthGuard)
-    async getAllReservations(){
-        try {
-            return await this.adminServices.getAllReservations();
-        } catch (error) {
-            console.error('Error fetching reservations:', error);
-            throw new InternalServerErrorException({ error: error.error ,message: error.message});
-        }
-    }
+
 }

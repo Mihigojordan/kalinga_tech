@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `driver` ADD COLUMN `driverType` VARCHAR(191) NULL DEFAULT 'ON WAGE';

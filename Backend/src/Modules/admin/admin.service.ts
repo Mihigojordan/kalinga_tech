@@ -7,14 +7,13 @@ import { PrismaService } from 'src/Prisma/prisma.service';
 import * as bcrypt from 'bcryptjs';
 import { Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
-import { ReservationService } from '../Reservation/reservation.service';
 
 @Injectable()
 export class AdminService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
-    private readonly reservationService: ReservationService,
+
   ) {}
 
   emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -266,13 +265,5 @@ export class AdminService {
     }
   }
 
-  async getAllReservations() {
-    try {
-        const reservations = await this.reservationService.getAllReservations();
-        return reservations;
-    } catch (error) {
-        console.error('Error fetching reservations:', error);
-        throw new InternalServerErrorException('Could not fetch reservations');
-    }
-  }
+
 }
