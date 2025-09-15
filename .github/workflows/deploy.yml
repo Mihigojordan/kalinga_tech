@@ -13,27 +13,38 @@ jobs:
       - name: ⏬ Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Install dependencies for backend
+      # Step 2: Install dependencies
       - name: 📦 Install backend dependencies
         run: npm install
         working-directory: ./Backend
 
-      # Step 3: Build the backend
+      # Step 3: Build project
       - name: 🛠 Build backend
         run: npm run build
         working-directory: ./Backend
 
-      # Step 4: Upload dist folder only
+      # Step 4: Clean old dist on server
+      - name: 🧹 Clean old dist on server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: 162.0.224.102
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            rm -rf /var/www/kalingatech/dist/*
+            mkdir -p /var/www/kalingatech/dist
+
+      # Step 5: Upload dist folder (contents only, no nesting)
       - name: 📂 Upload dist folder
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 162.0.224.102
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: ./Backend/dist
+          source: ./Backend/dist/*
           target: /var/www/kalingatech/dist
 
-      # Step 5: Upload package.json and package-lock.json
+      # Step 6: Upload package.json and package-lock.json
       - name: 📦 Upload package files
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -42,3 +53,15 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: ./Backend/package*.json
           target: /var/www/kalingatech
+
+      # Step 7: Install production deps & restart with PM2
+      - name: 🔄 Restart backend with PM2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: 162.0.224.102
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/kalingatech
+            npm install --production
+            pm2 restart kalingatechbackend --update-env || pm2 start dist/main.js --name kalingatechbackend
