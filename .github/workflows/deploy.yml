@@ -20,13 +20,11 @@ jobs:
 
       # Step 3: Build the backend
       - name: 🛠 Build backend
-        run: |
-          npm run build
-          ls -la ./Backend/dist
+        run: npm run build
         working-directory: ./Backend
 
-      # Step 4: Upload compiled backend (dist folder) to VPS
-      - name: 📂 Upload compiled backend
+      # Step 4: Upload dist folder only
+      - name: 📂 Upload dist folder
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 162.0.224.102
@@ -44,15 +42,3 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: ./Backend/package*.json
           target: /var/www/kalingatech
-
-      # Step 6: Restart backend with PM2
-      - name: 🔄 Restart backend with PM2
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: 162.0.224.102
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /var/www/kalingatech
-            npm install --production
-            pm2 restart backend || pm2 start dist/main.js --name backend
