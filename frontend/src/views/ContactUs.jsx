@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ContactBgImg from "../assets/static/contact.jpeg"; // Import the image
+import ContactBgImg from "../assets/contact.jpg"; // Import the image
 import { ContactService } from "../Services/Landing/ContactService"; // Adjust the path as needed
 
 import "../assets/css/ContactUs.css";
@@ -29,6 +29,21 @@ const ContactUs = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  function contactClientByEmail(email, subject = "", body = "") {
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    // Normal mailto for phones
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  } else {
+    // Force Gmail in browser for PC
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(gmailLink, "_blank", "noopener,noreferrer");
+  }
+}
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,71 +107,85 @@ const ContactUs = () => {
             {/* Right Section: Contact Details (Stacked on small, grid on large) */}
             <div className="w-full lg:w-1/2 flex flex-col lg:grid lg:grid-cols-2 justify-center gap-3">
               {/* Card 1 */}
-              <div className="re-box items-center p-6 rounded-lg bg-[#293751] lg:mt-24">
-                <div className="circle-icon bg-blue-600 text-white rounded-full p-4">
-                  <FaEnvelope className="text-white w-16 h-20" />
-                </div>
-                <div className="re-content mt-4 ">
-                  <h3
-                    className="text-[22px] font-semibold text-white"
-                    style={{ letterSpacing: "2px" }}
-                  >
-                    Email Address
-                  </h3>
-                  <p className="font-semibold text-[16px] text-gray-400 capitalize">
-                    <a
-                      href="#verified"
-                      className="email-txt text-[14px] text-gray-400"
-                    >
-                      kalingatechnology@gmail.com
-                    </a>
-                  </p>
-                </div>
-              </div>
+             {/* Card 1 */}
+<div
+  onClick={() =>
+    contactClientByEmail(
+      "kalingatechnology@gmail.com",
+      "Hello Kalinga Technology",
+      "I would like to get in touch with you."
+    )
+  }
+  className="cursor-pointer re-box items-center p-6 rounded-lg bg-[#293751] lg:mt-24 hover:shadow-xl transition"
+>
+  <div className="circle-icon bg-blue-600 text-white rounded-full p-4">
+    <FaEnvelope className="text-white w-16 h-20" />
+  </div>
+  <div className="re-content mt-4">
+    <h3
+      className="text-[22px] font-semibold text-white"
+      style={{ letterSpacing: "2px" }}
+    >
+      Email Address
+    </h3>
+    <p className="font-semibold text-[16px] text-gray-400 capitalize">
+      <span className="email-txt text-[14px] text-gray-400 underline">
+        kalingatechnology@gmail.com
+      </span>
+    </p>
+  </div>
+</div>
+
               {/* Card 2 */}
-              <div className="re-box items-center p-6 rounded-lg bg-[#293751] lg:mt-24">
-                <div className="circle-icon bg-blue-600 text-white rounded-full p-4">
-                  <FaMapMarkerAlt className="text-white w-6 h-4" />
-                </div>
-                <div className="re-content mt-4">
-                  <h3
-                    className="text-[22px] font-semibold text-white"
-                    style={{ letterSpacing: "2px" }}
-                  >
-                    Location Address
-                  </h3>
-                  <p className="text-gray-600 font-semibold">
-                    <a
-                      href="#verified"
-                      className="email-txt text-[14px] text-gray-400"
-                    >
-                      Near Kigali Mosque, 84 KN 74 St, Kigali
-                    </a>
-                  </p>
-                </div>
-              </div>
+           <div className="re-box items-center p-6 rounded-lg bg-[#293751] lg:mt-24">
+  <div className="circle-icon bg-blue-600 text-white rounded-full p-4">
+    <FaMapMarkerAlt className="text-white w-6 h-4" />
+  </div>
+  <div className="re-content mt-4">
+    <h3
+      className="text-[22px] font-semibold text-white"
+      style={{ letterSpacing: "2px" }}
+    >
+      Location Address
+    </h3>
+    <p className="text-gray-600 font-semibold">
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=Near+Kigali+Mosque,+84+KN+74+St,+Kigali"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="email-txt text-[14px] text-gray-400"
+      >
+        Near Kigali Mosque, 84 KN 74 St, Kigali
+      </a>
+    </p>
+  </div>
+</div>
+
               {/* Card 3 */}
               <div className="re-box items-center p-6 rounded-lg bg-[#293751]">
-                <div className="circle-icon bg-blue-600 text-white rounded-full p-4">
-                  <FaPhoneAlt className="text-white w-3 h-3 sm:w-4 sm:h-4 md:w-4 md:h-4" />
-                </div>
-                <div className="re-content mt-4">
-                  <h3
-                    className="text-[22px] font-semibold text-white"
-                    style={{ letterSpacing: "2px" }}
-                  >
-                    Phone Call
-                  </h3>
-                  <p className="text-gray-600 font-semibold">
-                    <a
-                      href="#verified"
-                      className="email-txt text-[14px] text-gray-400"
-                    >
-                      +250 786 136 396
-                    </a>
-                  </p>
-                </div>
-              </div>
+  <div className="circle-icon bg-blue-600 text-white rounded-full p-4">
+    <FaPhoneAlt className="text-white w-3 h-3 sm:w-4 sm:h-4 md:w-4 md:h-4" />
+  </div>
+  <div className="re-content mt-4">
+    <h3
+      className="text-[22px] font-semibold text-white"
+      style={{ letterSpacing: "2px" }}
+    >
+      Phone Call
+    </h3>
+    <p className="text-gray-600 font-semibold">
+      <a
+        href="https://wa.me/250786136396?text=Hi"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="email-txt text-[14px] underline text-gray-400"
+      >
+        +250 786 136 396
+      </a>
+    </p>
+  </div>
+</div>
+
               <div className="re-box items-center p-6 rounded-lg bg-[#293751]">
                 <div className="circle-icon bg-blue-600 text-white rounded-full p-4">
                   <FaQuestionCircle className="text-white w-16 h-20" />

@@ -9,7 +9,8 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import "../assets/css/ContactUs.css";
-import Logo from "../../public/kalinga_logo2.png";
+import Logo from "../assets/kalinga_logo.png";
+import { Phone } from "lucide-react";
 const Footer = () => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -32,7 +33,7 @@ const Footer = () => {
             out to us on social media.
           </p>
           <a
-            href="https://wa.me/16166337026?text=Hi, how can I get more information on your service?"
+            href="https://wa.me/+250786136396?text=Hi, how can I get more information on your service?"
             target="_blank"
             rel="noopener noreferrer"
             className="flex w-[40%] items-center mt-8  bg-[#47B2E4] text-sm text-white py-3 px-6 rounded-full"
@@ -51,7 +52,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <Link
-                  to="/services/language-translation"
+                  to="/services"
                   className="text-gray-300 hover:text-[#47B2E4] transition"
                 >
                   computer selling
@@ -59,20 +60,20 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/services/language-translation"
+                  to="/services/playstation-devices"
                   className="text-gray-300 hover:text-[#47B2E4] transition"
                 >
                   game accessories selling
                 </Link>
               </li>
-                   <li>
+                   {/* <li>
                 <Link
                   to="/terms-and-conditions"
                   className="text-gray-300 hover:text-[#47B2E4] transition"
                 >
                   terms and conditions
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -82,18 +83,18 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <Link
-                  to="/history"
+                  to="/product"
                   className="text-gray-300 hover:text-[#47B2E4] transition"
                 >
-                  Our History
+                  Our Products
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/location"
+                  to="/blog"
                   className="text-gray-300 hover:text-[#47B2E4] transition"
                 >
-                  Location
+                  Blogs
                 </Link>
               </li>
 
@@ -120,7 +121,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
 
-              <Link
+              {/* <Link
                 to="https://x.com/abyridellc"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-600 hover:bg-[#47B2E4] transition"
               >
@@ -145,7 +146,15 @@ const Footer = () => {
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-600 hover:bg-[#47B2E4] transition"
               >
                 <FaYoutube />
-              </Link>
+              </Link> */}
+              <Link
+                to="/contact-us"
+                className="flex items-center mt-8 gap-2  bg-[#47B2E4] text-sm text-white py-3 px-6 rounded-full"
+              >
+                <Phone size={20} /> <span className="text-md font-medium">Contact Us</span>
+              </Link> 
+
+              
             </div>
           </div>
         </div>

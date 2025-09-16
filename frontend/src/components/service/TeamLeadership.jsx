@@ -1,5 +1,5 @@
 import React from "react";
-import Picture from "../../assets/static/contact.jpeg";
+import Picture from "../../assets/contact.jpg";
 import hiringPicture from "../../assets/images/service/strategicPlanning1.jpg";
 import { CheckIcon } from "@heroicons/react/20/solid";
 

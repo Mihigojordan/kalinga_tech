@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Play, ArrowRight } from "lucide-react";
 import Image1 from '../../assets/static/slide1.jpg';
 import Image2 from '../../assets/static/slide2.jpg';
 import Image3 from '../../assets/static/slide3.jpg';
+import { Link } from "react-router-dom";
 
 
 const HeroPage = () => {
@@ -97,14 +98,18 @@ const serviceTypes = [
 
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-3 mb-3">
+                  <Link to='/about'>
                     <button className="group px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold text-sm hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
                       <Play size={16} className="group-hover:translate-x-1 transition-transform" />
                       More About
                     </button>
+                  </Link>
+                   <Link to='/product'>
                     <button className="px-6 py-3 bg-white/20 backdrop-blur-md text-white rounded-xl font-semibold text-sm border border-white/30 hover:bg-white/30 transition-all duration-300 flex items-center justify-center gap-2">
                       Get Started
                       <ArrowRight size={16} />
                     </button>
+                   </Link>
                   </div>
                 </div>
               </div>

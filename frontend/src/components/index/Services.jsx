@@ -29,7 +29,8 @@ const ServiceCard = ({ SvgIcon, num, Img, title, par }) => {
       transition={{ duration: 0.6 }}
     >
       {/* Gradient overlay */}
-      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#47B2E4] to-[#293751] opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#47B2E4] to-[#293751] opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none"></div>
+
 
       {/* Header */}
       <div className="relative p-4 pb-3">

@@ -3,7 +3,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import Logo from "../../public/kalinga_logo.png";
+import Logo from "../assets/kalinga_logo.png";
 import SimpleHeader from "./SimpleHeader";
 
 const Navbar = () => {
@@ -44,7 +44,7 @@ const Navbar = () => {
       <SimpleHeader />
       <div className="w-full  sticky top-0  bg-gradient-to-br from-slate-300 via-blue-50 to-cyan-200 px-2 p-0 -mt-4 rounded-xl flex justify-between items-center shadow-md mb-2">
         {/* Logo */}
-        <img src={Logo} alt="Logo" className="h-20 ml-12 object-contain  " />
+        <img src={Logo} alt="Logo" className="h-20 w-28 ml-12 object-cover  " />
 
         {/* Center Links - Desktop */}
         <div className="hidden lg:flex justify-center items-center">

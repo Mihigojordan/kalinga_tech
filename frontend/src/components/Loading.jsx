@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../../public/kalinga_logo.png"; // Replace with your logo path
+import Logo from "../assets/kalinga_logo.png";
 
 // eslint-disable-next-line react/prop-types
 const Loader = ({ onFinish }) => {

@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Faq = () => {
-  const [visibleAnswers, setVisibleAnswers] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [visibleAnswers, setVisibleAnswers] = useState(
+    Array(8).fill(false) // match number of FAQs
+  );
 
   const toggleAnswerVisibility = (index) => {
     setVisibleAnswers((prev) => {
@@ -18,77 +14,52 @@ const Faq = () => {
     });
   };
 
+  // Updated FAQs for Rwanda computer & PlayStation buyers
   const faqs = [
     {
-      question: "How Do I Get Started?",
+      question: "Where can I buy a reliable computer in Rwanda?",
       answer:
-        "Our service aims to provide seamless solutions to manage your tasks efficiently and effectively.",
+        "At Kalinga Tech, we provide brand new and high-quality laptops and desktops with warranty and after-sales support.",
     },
     {
-      question: "Can We Start Any Time Of Year?",
+      question: "Do you sell genuine PlayStation devices?",
       answer:
-        "Getting started is easy! Just sign up on our platform, explore the features, and begin your journey.",
+        "Yes, we sell authentic PlayStation 4 and PlayStation 5 consoles with original accessories and guarantee on all products.",
     },
     {
-      question: "What Salary Do You Pay?",
+      question: "Can I pay in installments?",
       answer:
-        "We offer 24/7 customer support to address all your queries and concerns.",
+        "We provide flexible payment options and financing plans for students, businesses, and families in Rwanda.",
     },
     {
-      question: "Can I Customize My Solution?",
+      question: "Do your computers come with warranty?",
       answer:
-        "Yes, our platform allows for extensive customization to fit your needs.",
+        "All computers and laptops come with a manufacturer warranty and local support from our technical team.",
     },
     {
-      question: "Preventing HR-Business Plan?",
+      question: "Do you deliver outside Kigali?",
       answer:
-        "We use top-notch security measures to ensure your data is safe and private.",
+        "Yes, we deliver across Rwanda through reliable courier services, ensuring your device reaches safely and quickly.",
     },
     {
-      question: "How Does The Engangement Changes As My Business Scales?",
+      question: "What accessories do you sell?",
       answer:
-        "We use top-notch security measures to ensure your data is safe and private.",
+        "We sell computer accessories such as keyboards, mice, headsets, monitors, as well as PlayStation controllers and games.",
     },
     {
-      question: "Is HR Consult The Right Consultancy For Me?",
+      question: "Do you provide technical support after purchase?",
       answer:
-        "We use top-notch security measures to ensure your data is safe and private.",
+        "Yes, our support team assists with software installation, troubleshooting, and upgrades for both computers and PlayStations.",
     },
     {
-      question: "In Which Countries Can i Find Your Company?",
+      question: "Can I trade in my old laptop or PlayStation?",
       answer:
-        "We use top-notch security measures to ensure your data is safe and private.",
-    },
-    {
-      question: "Popular Training For Tips And Business Benefits?",
-      answer:
-        "We use top-notch security measures to ensure your data is safe and private.",
-    },
-    {
-      question: "Is HR Consult The Right Consultancy For Me?",
-      answer:
-        "We use top-notch security measures to ensure your data is safe and private.",
+        "We offer trade-in options where you can exchange your old device for a discount on a new one, subject to evaluation.",
     },
   ];
 
   return (
     <>
-      {/* <div className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg mt-10">
-        
-        <div 
-          className="absolute inset-0 bg-cover bg-center" 
-          style={{ backgroundImage: `url('src/assets/images/service/marketResearch.jpg')`, filter: 'brightness(30%)' }}
-        ></div>
-
-    
-        <div className="absolute inset-y-0 left-0 w-[60%] bg-teal-800 bg-opacity-90"></div>
-
-        <div className="relative z-10 p-8 text-white">
-          <h1 className="text-4xl font-bold mt-20">FAQ</h1>
-          <p className='text-1xl '>Home / FAQ</p>
-        </div>
-      </div> */}
-
       <div className="relative z-10 px-8 py-12">
         <div className="flex justify-center mb-6">
           <p className="text-1xl text-center p-2 w-fit bg-slate-100 rounded-lg shadow-md">
@@ -97,7 +68,7 @@ const Faq = () => {
         </div>
 
         <h1 className="text-5xl font-bold mb-6 text-center">
-          Question and Answer
+          Frequently Asked Questions
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -110,13 +81,13 @@ const Faq = () => {
                 <h2 className="text-lg font-semibold mr-4">{faq.question}</h2>
                 <button
                   onClick={() => toggleAnswerVisibility(index)}
-                  className="text-gray-700 hover:text-gray-700 focus:outline-none text-xl"
+                  className="text-gray-700 hover:text-gray-900 focus:outline-none text-xl"
                 >
                   {visibleAnswers[index] ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
               {visibleAnswers[index] && (
-                <p className="mt-4 text-sm leading-5  text-gray-900 rounded p-4 w-full">
+                <p className="mt-4 text-sm leading-5 text-gray-900 rounded p-4 w-full bg-white shadow-inner">
                   {faq.answer}
                 </p>
               )}

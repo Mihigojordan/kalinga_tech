@@ -149,13 +149,20 @@ function Blog() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       <Header title="News And Update" />
       {/* Blog Grid */}
-      <section className="py-8 px-2 sm:px-6 lg:px-4">
-        <div className="max-w-9xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogDataElement}
-          </div>
-        </div>
-      </section>
+<section className="py-8 px-2 sm:px-6 lg:px-4">
+  <div className="max-w-9xl mx-auto">
+    {blogs.length === 0 ? (
+      <p className="text-center text-gray-600 text-lg">
+        No blogs available at the moment.
+      </p>
+    ) : (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {blogDataElement}
+      </div>
+    )}
+  </div>
+</section>
+
     </div>
   );
 }
