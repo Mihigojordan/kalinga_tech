@@ -92,8 +92,8 @@ export class AdminService {
       res.cookie('adminAccessToken', token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        sameSite: 'lax', // Adjust based on your needs
+        secure: true, // Use secure cookies in production
+        sameSite: 'none', // Adjust based on your needs
       });
 
       return { message: 'Admin logged in successfully' };
